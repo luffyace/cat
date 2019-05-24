@@ -185,7 +185,7 @@ public class AtomicMessageConfigManager implements Initializable {
 	}
 
 	public int getMaxNameThreshold(String domain) {
-		return getPropertyValue(domain, "max-name-threshold", 200);
+		return getPropertyValue(domain, "max-name-threshold", 2000);
 	}
 
 	public int getMaxBusinessItemCount(String domain) {

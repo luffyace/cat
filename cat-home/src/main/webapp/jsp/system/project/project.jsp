@@ -104,39 +104,44 @@
 		<input type="hidden" name="project.domain" value="${model.project.domain}" />
 		<input type="hidden" name="op" value="updateSubmit" />
 		<tr>
-			<td style="width:10%;">CAT上项目名称</td>
+			<td style="width:11%;">CAT上项目名称</td>
 			<td>${model.project.domain}</td>
 			<td style="color:red">注意：建议使用半角英文和半角符号(. -)。</td>
 		</tr>
 		<tr style="display: none">
-			<td style="width:10%;">CMDB项目名称</td>
+			<td style="width:11%;">CMDB项目名称</td>
 			<td><input type="name" class="input-xlarge" name="project.cmdbDomain" value="${model.project.cmdbDomain}" /></td>
 			<td>CMDB中项目统一名称<span  style="color:red">【CMDB中没有的话，与CAT上的项目名称保持一致即可】</span></td>
 		</tr>
         <tr style="display: none">
-			<td style="width:10%;">CMDB项目级别</td>
+			<td style="width:11%;">CMDB项目级别</td>
 			<td><input type="name" class="input-xlarge" name="project.level" value="${model.project.level}" /></td>
 			<td>CMDB中项目统一级别<span  style="color:red">【此字段会和CMDB信息同步】</span></td>
 		</tr>
 		<tr>
-			<td style="width:10%;">事业部</td>
+			<td style="width:11%;">事业部</td>
 			<td><input type="name" class="input-xlarge" name="project.bu" value="${model.project.bu}" /></td>
             <td>所属部门名称</td>
 		</tr>
 		<tr>
-			<td style="width:10%;">产品线</td>
+			<td style="width:11%;">产品线</td>
 			<td><input type="name" class="input-xlarge" name="project.cmdbProductline" value="${model.project.cmdbProductline}" /></td>
             <td>所属产品线名称</td>
 		</tr>
 		<tr>
-			<td style="width:10%;">负责人</td>
+			<td style="width:11%;">负责人</td>
 			<td><input type="name" class="input-xlarge" name="project.owner" value="${model.project.owner}"/></td>
 			<td>项目负责人</td>
 		</tr>
 		<tr>
-			<td style="width:10%;">项目组邮件</td>
+			<td style="width:11%;">项目组邮件</td>
 			<td><input type="name" name="project.email" class="input-xxlarge" value="${model.project.email}"/></td>
 			<td>字段(多个，逗号分割)</td>
+		</tr>
+		<tr>
+			<td style="width:11%;">项目组钉钉提示URL</td>
+			<td><input type="name" name="project.dingTalkUrl" class="input-xxlarge" value="${model.project.dingTalkUrl}"/></td>
+			<td>钉钉机器人请求URL</td>
 		</tr>
 		<tr>
 			<td>项目组号码</td>

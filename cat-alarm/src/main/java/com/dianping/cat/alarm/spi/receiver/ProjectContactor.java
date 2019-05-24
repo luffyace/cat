@@ -93,7 +93,7 @@ public abstract class ProjectContactor extends DefaultContactor implements Conta
 				Project project = m_projectService.findByDomain(id);
 
 				if (project != null) {
-					weixinReceivers.addAll(split(project.getEmail()));
+					weixinReceivers.addAll(split(project.getWeixin()));
 				}
 			}
 			return weixinReceivers;
@@ -114,10 +114,31 @@ public abstract class ProjectContactor extends DefaultContactor implements Conta
 				Project project = m_projectService.findByDomain(id);
 
 				if (project != null) {
-					receivers.addAll(split(project.getEmail()));
+					receivers.addAll(split(project.getPhone()));
 				}
 			}
 			return receivers;
+		}
+	}
+
+	@Override
+	public List<String> queryDingTalkContactors(String id) {
+		List<String> dingTalkReceivers = new ArrayList<String>();
+		Receiver receiver = m_configManager.queryReceiverById(getId());
+
+		if (receiver != null && !receiver.isEnable()) {
+			return dingTalkReceivers;
+		} else {
+			dingTalkReceivers.addAll(buildDefaultDingTalkReceivers(receiver));
+
+			if (StringUtils.isNotEmpty(id)) {
+				Project project = m_projectService.findByDomain(id);
+
+				if (project != null) {
+					dingTalkReceivers.addAll(split(project.getDingTalkUrl()));
+				}
+			}
+			return dingTalkReceivers;
 		}
 	}
 

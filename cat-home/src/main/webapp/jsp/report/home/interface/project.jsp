@@ -17,6 +17,7 @@
 	<tr><td>project.owner</td><td>项目负责人，<span class="text-danger">必需</span></td></tr>
 	<tr><td>project.email</td><td>多个英文逗号分割，<span class="text-danger">必需</span></td></tr>
 	<tr><td>project.phone</td><td>多个英文逗号分割，<span class="text-danger">必需</span></td></tr>
+	<tr><td>project.dingTalkUrl</td><td>多个英文逗号分割，<span class="text-danger">必需</span></td></tr>
 </table>
 
 <p> 示例：

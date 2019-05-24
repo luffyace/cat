@@ -1,3 +1,5 @@
+CREATE DATABASE IF NOT EXISTS cat_schema DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+use cat_schema;
 CREATE TABLE `dailyreport` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL COMMENT '报表名称, transaction, problem...',
@@ -302,3 +304,7 @@ CREATE TABLE `server_alarm_rule` (
       PRIMARY KEY (`id`),
       KEY `updatetime` (`updatetime`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='系统告警的配置';
+
+
+alter table project add column weixin varchar(200) COMMENT '微信号' after phone;
+alter table project add column dingTalkUrl varchar(200) COMMENT '钉钉机器人url' after weixin;

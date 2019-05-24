@@ -18,6 +18,8 @@
  */
 package com.dianping.cat.configuration;
 
+import com.dianping.cat.util.PropertiesUtil;
+import com.dianping.cat.util.YmlUtil;
 import java.io.File;
 import java.io.InputStream;
 import java.util.Collections;
@@ -46,8 +48,11 @@ import com.dianping.cat.message.spi.MessageTree;
 
 @Named(type = ClientConfigManager.class)
 public class DefaultClientConfigManager implements LogEnabled, ClientConfigManager, Initializable {
+	private static final String appNameKey = "app.name";
 
-	private static final String PROPERTIES_FILE = "/META-INF/app.properties";
+	public static final String[] PROPERTIES_FILES_YML = {"bootstrap.yml","application.yml"};
+	public static final String[] PROPERTIES_FILES_PROPERTIES = {"application.properties","/META-INF/app.properties"};
+
 
 	private ClientConfig m_config;
 
@@ -104,6 +109,7 @@ public class DefaultClientConfigManager implements LogEnabled, ClientConfigManag
 		return m_routers;
 	}
 
+	@Override
 	public double getSampleRatio() {
 		return m_sampleRate;
 	}
@@ -195,6 +201,7 @@ public class DefaultClientConfigManager implements LogEnabled, ClientConfigManag
 		return m_atomicTreeParser.isAtomicMessage(tree);
 	}
 
+	@Override
 	public boolean isBlock() {
 		return m_block;
 	}
@@ -229,43 +236,25 @@ public class DefaultClientConfigManager implements LogEnabled, ClientConfigManag
 		return null;
 	}
 
+
 	private String loadProjectName() {
 		String appName = null;
-		InputStream in = null;
-		try {
-			in = Thread.currentThread().getContextClassLoader().getResourceAsStream(PROPERTIES_FILE);
-
-			if (in == null) {
-				in = Cat.class.getResourceAsStream(PROPERTIES_FILE);
+		for(String fileName: PROPERTIES_FILES_YML){
+			appName = YmlUtil.loadProjectName(fileName,appNameKey,m_logger);
+			if(null != appName && appName.length() > 0){
+				return appName.trim();
 			}
-			if (in != null) {
-				Properties prop = new Properties();
-
-				prop.load(in);
-
-				appName = prop.getProperty("app.name");
-				if (appName != null) {
-					m_logger.info(String.format("Find domain name %s from app.properties.", appName));
-				} else {
-					m_logger.info(String.format("Can't find app.name from app.properties."));
-					return null;
-				}
-			} else {
-				m_logger.info(String.format("Can't find app.properties in %s", PROPERTIES_FILE));
-			}
-		} catch (Exception e) {
-			m_logger.error(e.getMessage(), e);
-		} finally {
-			if (in != null) {
-				try {
-					in.close();
-				} catch (Exception e) {
-				}
+		}
+		for(String fileName: PROPERTIES_FILES_YML){
+			appName = PropertiesUtil.loadProjectName(fileName,appNameKey,m_logger);
+			if(null != appName && appName.length() > 0){
+				return appName.trim();
 			}
 		}
 		return appName;
 	}
 
+	@Override
 	public void refreshConfig() {
 		String url = getServerConfigUrl();
 

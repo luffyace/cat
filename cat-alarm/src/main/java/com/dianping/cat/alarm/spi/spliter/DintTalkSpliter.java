@@ -16,21 +16,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.dianping.cat.alarm.spi.receiver;
+package com.dianping.cat.alarm.spi.spliter;
 
-import java.util.List;
+import com.dianping.cat.alarm.spi.AlertChannel;
+import java.util.regex.Pattern;
 
-public interface Contactor {
+public class DintTalkSpliter implements Spliter {
 
-	public String getId();
+  public static final String ID = AlertChannel.DINGTALK.getName();
 
-	public List<String> queryEmailContactors(String id);
+  @Override
+  public String getID() {
+    return ID;
+  }
 
-	public List<String> queryWeiXinContactors(String id);
+  @Override
+  public String process(String content) {
+    String dxContent = content.replaceAll("<br/>", " ");
+    dxContent = Pattern.compile("<div.*(?=</div>)</div>", Pattern.DOTALL).matcher(dxContent).replaceAll("");
+    dxContent = Pattern.compile("<table.*(?=</table>)</table>", Pattern.DOTALL).matcher(dxContent).replaceAll("");
 
-	public List<String> querySmsContactors(String id);
+    return dxContent;
+  }
 
-	public List<String> queryDXContactors(String id);
-
-	public List<String> queryDingTalkContactors(String id);
 }
