@@ -319,13 +319,11 @@ public class ChannelManager implements Task {
 	private List<InetSocketAddress> parseSocketAddress(String content) {
 		try {
 			List<String> strs = Splitters.by(";").noEmptyItem().split(content);
-			m_logger.info("parse Socket address " + strs);
-
 			List<InetSocketAddress> address = new ArrayList<InetSocketAddress>();
 
 			for (String str : strs) {
 				List<String> items = Splitters.by(":").noEmptyItem().split(str);
-				m_logger.info("address " + items.get(0));
+
 				address.add(new InetSocketAddress(items.get(0), Integer.parseInt(items.get(1))));
 			}
 			return address;

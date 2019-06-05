@@ -304,7 +304,3 @@ CREATE TABLE `server_alarm_rule` (
       PRIMARY KEY (`id`),
       KEY `updatetime` (`updatetime`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='系统告警的配置';
-
-
-alter table project add column weixin varchar(200) COMMENT '微信号' after phone;
-alter table project add column dingTalkUrl varchar(200) COMMENT '钉钉机器人url' after weixin;
