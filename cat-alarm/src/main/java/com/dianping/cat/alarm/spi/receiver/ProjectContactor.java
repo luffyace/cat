@@ -121,25 +121,4 @@ public abstract class ProjectContactor extends DefaultContactor implements Conta
 		}
 	}
 
-	@Override
-	public List<String> queryDingTalkContactors(String id) {
-		List<String> dingTalkReceivers = new ArrayList<String>();
-		Receiver receiver = m_configManager.queryReceiverById(getId());
-
-		if (receiver != null && !receiver.isEnable()) {
-			return dingTalkReceivers;
-		} else {
-			dingTalkReceivers.addAll(buildDefaultDingTalkReceivers(receiver));
-
-			if (StringUtils.isNotEmpty(id)) {
-				Project project = m_projectService.findByDomain(id);
-
-				if (project != null) {
-					dingTalkReceivers.addAll(split(project.getDingTalkUrl()));
-				}
-			}
-			return dingTalkReceivers;
-		}
-	}
-
 }

@@ -17,7 +17,7 @@ ${contactInfo}<br/>
 ```
 ### 1.1.2、添加微信渠道支持
 * 修改代码生成配置文件<br/>
-  cat/cat-core/src/main/resources/META-INF/dal/jdbc/report-codegen.xml，在project表的phone字段后添加
+cat/cat-core/src/main/resources/META-INF/dal/jdbc/report-codegen.xml，在project表的phone字段后添加
 ```xml
 <member name="weixin" field="weixin" value-type="String" length="200" />
 ```
