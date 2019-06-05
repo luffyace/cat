@@ -16,7 +16,8 @@
 					<div id="editor" class="editor">${model.content}</div>
 					</td></tr>
 					<tr><td>
-					<input name="allOnOrOff" id="allOnOrOff" type="text" value="" style="display:none" />
+					<input name="allOnOrOff" id="allOnOrOff" type="text" value=""
+						style="display:none"></input>
 					<tr>
 						<td style="text-align: center"><input class='btn btn-primary'
 							type="submit" name="submit" id="submit" value="提交" />&nbsp;&nbsp;<input
