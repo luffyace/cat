@@ -245,7 +245,7 @@ public class DefaultClientConfigManager implements LogEnabled, ClientConfigManag
 				return appName.trim();
 			}
 		}
-		for(String fileName: PROPERTIES_FILES_YML){
+		for(String fileName: PROPERTIES_FILES_PROPERTIES){
 			appName = PropertiesUtil.loadProjectName(fileName,appNameKey,m_logger);
 			if(null != appName && appName.length() > 0){
 				return appName.trim();

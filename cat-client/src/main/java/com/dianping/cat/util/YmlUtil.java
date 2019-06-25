@@ -22,6 +22,8 @@ public class YmlUtil {
     if (!fileName.endsWith(file_sufffix)) {
       return null;
     }
+    m_logger.info(">>>>>>>>使用配置文件："+fileName);
+    m_logger.info(">>>>>>>>key："+key);
     String appName = null;
     InputStream in = null;
     try {
@@ -58,11 +60,18 @@ public class YmlUtil {
 
   private static Object getValue(String key, Map<Object, Object> ymls, Logger m_logger) {
     // 首先将key进行拆分
-    String[] keys = key.split("[.]");
-
+    String[] keys = key.split("\\.");
+    m_logger.info(">>>>>>>>>>>>key: "+key);
     // 将配置文件进行复制
     Map ymlInfo = ymls;
+    if(null == ymlInfo || ymlInfo.isEmpty()){
+      return null;
+    }
     for (int i = 0; i < keys.length; i++) {
+      m_logger.info(">>>>>>>>>>>>keys["+i+"]: "+keys[i]);
+      if(null == keys[i]) {
+        continue;
+      }
       Object value = ymlInfo.get(keys[i]);
       if (i < keys.length - 1) {
         ymlInfo = (Map) value;
